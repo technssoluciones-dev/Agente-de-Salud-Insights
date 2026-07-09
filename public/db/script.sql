@@ -31,3 +31,9 @@ CREATE INDEX idx_chat_messages_session_id ON chat_messages(session_id);
 
 -- Add unique constraint to prevent duplicate emails
 ALTER TABLE users ADD CONSTRAINT unique_email UNIQUE (email);
+
+-- Grant permissions to anon and authenticated roles
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.users TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.chat_sessions TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.chat_messages TO anon, authenticated;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated;
